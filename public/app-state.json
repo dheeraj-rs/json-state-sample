@@ -1,33 +1,15 @@
 {
   "theme": {
-    "mode": "dark",
-    "primaryColor": "#3B82F6",
-    "secondaryColor": "#10B981",
-    "backgroundColor": "#ffffff",
-    "textColor": "#1f2937"
+    "mode": "light",
+    "color": "#bbc624"
   },
   "layout": {
-    "sidebar": false,
-    "header": true,
-    "footer": false,
-    "columns": 2
+    "sidebar": true
   },
   "content": {
-    "title": "JSON State Manager",
-    "subtitle": "Real-time state management without React state",
-    "showImages": true,
-    "showButtons": true
-  },
-  "features": {
-    "animations": true,
-    "transitions": true,
-    "shadows": true,
-    "gradients": false
+    "title": "JSON State Managerss"
   },
   "settings": {
-    "autoSave": true,
-    "livePreview": true,
-    "showJson": true,
-    "fontSize": 20
+    "fontSize": 21
   }
 }
