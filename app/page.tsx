@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from 'react';
-import { Download, Code, Palette, Settings, Monitor, FileText, Save, RefreshCw } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Download, Code, Palette, Settings, Monitor, FileText } from 'lucide-react';
 
 class JSONStateManager {
   private state: any;
@@ -127,16 +127,11 @@ class JSONStateManager {
       console.log('Save already in progress, skipping...');
       return;
     }
-    
+
     this.isSaving = true;
-    console.log('Saving to file...');
-    
     const startTime = Date.now();
-    
+
     try {
-      console.log(`Saving state (attempt ${attempt}/${maxAttempts})...`);
-      console.log('State to save:', JSON.stringify(this.state, null, 2));
-      
       const response = await fetch('/api/save-state', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -148,20 +143,13 @@ class JSONStateManager {
         console.error('Server responded with error:', errorText);
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      
       const result = await response.json();
-      console.log('Save response:', result);
-      
       if (!result.success) {
         throw new Error(result.message || 'Failed to save state');
       }
-      
-      const duration = Date.now() - startTime;
-      console.log(`✅ State saved successfully in ${duration}ms`);
-      
     } catch (error) {
       console.error(`❌ Error saving state (attempt ${attempt}):`, error);
-      
+
       if (attempt < maxAttempts) {
         const delay = Math.min(1000 * attempt, 5000);
         console.log(`Retrying in ${delay}ms...`);
@@ -169,9 +157,9 @@ class JSONStateManager {
         return this.saveToFile(attempt + 1, maxAttempts);
       } else {
         console.error('Max retry attempts reached, giving up');
-        throw error; // Re-throw to allow error handling in updateState
+        throw error;
       }
-      
+
     } finally {
       this.isSaving = false;
     }
@@ -588,12 +576,6 @@ export default function Home() {
             {/* JSON Content */}
             <div className="flex-1 overflow-auto p-4 lg:p-6">
               <div className="json-container h-full">
-                <div className="json-header bg-gray-800 p-4 rounded-t-lg border-b border-gray-700">
-                  <div className="flex items-center space-x-2">
-                    <FileText size={16} className="text-blue-400" />
-                    <span className="font-medium text-white">app-state.json</span>
-                  </div>
-                </div>
                 <div className="json-content bg-gray-900 p-6 rounded-b-lg flex-1 overflow-auto">
                   <pre className="text-gray-100 font-mono text-sm leading-relaxed">
                     <code dangerouslySetInnerHTML={{ __html: formatJSON(state) }} />

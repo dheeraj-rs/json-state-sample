@@ -1,13 +1,13 @@
 {
   "theme": {
-    "mode": "light",
+    "mode": "dark",
     "primaryColor": "#3B82F6",
     "secondaryColor": "#10B981",
     "backgroundColor": "#ffffff",
     "textColor": "#1f2937"
   },
   "layout": {
-    "sidebar": true,
+    "sidebar": false,
     "header": true,
     "footer": false,
     "columns": 2
@@ -28,6 +28,6 @@
     "autoSave": true,
     "livePreview": true,
     "showJson": true,
-    "fontSize": 18
+    "fontSize": 20
   }
 }
